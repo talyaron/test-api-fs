@@ -53,6 +53,8 @@ router.get("/api/getStudentById", (req, res) => {
 router.post("/api/addStudent", (req, res) => {
   try {
     const {name,id} = req.body;
+    if(!name || !id) throw new Error('No name or id in body');
+
     console.log(req.body)
     MongoClient.connect(url, { useNewUrlParser: true,useUnifiedTopology: true }, function(err, db) {
       if(err) throw err;
@@ -70,7 +72,7 @@ router.post("/api/addStudent", (req, res) => {
     })
   } catch (error) {
     console.log(error);
-    res.status(400).send({error})
+    res.status(400).send({error:error.message})
   }
 })
 
