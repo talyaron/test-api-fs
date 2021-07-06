@@ -2,7 +2,9 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT||3000
 const bodyParser = require('body-parser');
+const cors = require('cors')
 
+app.use(cors())
 
 app.use(express.static('public'));
 
@@ -13,22 +15,6 @@ app.use(bodyParser.urlencoded({
 const routes = require('./routes/index');
 app.use('/', routes);
 
-app.get('/api', (req, res) => {
-    MongoClient.connect(url, { useNewUrlParser: true }, function (err, db) {
-        if (err) throw err;
-        var dbo = db.db("sampleDB");
 
-        
-        
-        dbo.collection("students").find().toArray().then(result=> {
-            if (err) throw err;
-            res.send(result)
-            db.close();
-        })
-        .catch(err=>{
-            console.log(err)
-        });
-    });
-})
 
 app.listen(port, () => console.log(`server listening on port ${port}!`))

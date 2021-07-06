@@ -54,6 +54,7 @@ router.post("/api/addStudent", (req, res) => {
   try {
     const {name,id} = req.body;
     if(!name || !id) throw new Error('No name or id in body');
+    if(typeof name !== 'string') throw new Error('name is not a string') 
 
     console.log(req.body)
     MongoClient.connect(url, { useNewUrlParser: true,useUnifiedTopology: true }, function(err, db) {
