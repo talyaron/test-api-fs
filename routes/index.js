@@ -5,7 +5,7 @@ var MongoClient = require("mongodb").MongoClient;
 
 var url = "mongodb+srv://tal1:z6CpE8X8HpaVferj@tal-test1.m39if.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
-router.get("/api", (req, res) => {
+router.get("/api/getStudents", (req, res) => {
   MongoClient.connect(url, { useNewUrlParser: true,useUnifiedTopology: true }, function(err, db) {
     if (err) throw err;
     const dbo = db.db("sampleDB");
